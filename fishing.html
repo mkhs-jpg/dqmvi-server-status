@@ -4,56 +4,78 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>釣り交換所 - DQMⅥ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Outfit:wght@200;300;400;600;800&display=swap" rel="stylesheet">
 <style>
-  body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; max-width: 900px; margin: 0 auto; padding: 20px 16px 48px; background:#f9f9f7; color:#0b0b0b; }
-  h1 { font-size: 20px; margin-bottom: 4px; }
-  .updated { color: #898781; font-size: 13px; margin-bottom: 20px; }
-  .links { font-size: 13px; margin-bottom: 16px; }
-  summary.section-toggle { cursor:pointer; font-size:15px; font-weight:600; margin:16px 0 10px; }
-  .notice { background:#fff8e6; border:1px solid #e8d38a; border-radius:8px; padding:10px 14px; font-size:13px; margin-bottom:16px; }
+  :root {
+    --bg:#070912; --ink:#eceffa; --muted:#8d95b2;
+    --gold:#e3c07d; --gold-lt:#f7e3b8; --violet:#6b5cff; --cyan:#49d8d0;
+    --line:rgba(255,255,255,.10); --surface:rgba(255,255,255,.035);
+  }
+  * { box-sizing: border-box; }
+  body { font-family: 'Zen Kaku Gothic New', 'Outfit', system-ui, -apple-system, "Segoe UI", sans-serif; max-width: 900px; margin: 0 auto; padding: 20px 16px 48px; background:var(--bg); color:var(--ink); }
+  h1 { font-size: 20px; margin-bottom: 4px; font-weight:700; }
+  a { color: var(--gold-lt); }
+  .updated { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+  .links { font-size: 13px; margin-bottom: 16px; color: var(--muted); }
+  .links a { color: var(--gold); text-decoration:none; }
+  .links a:hover { color: var(--gold-lt); text-decoration:underline; }
+  summary.section-toggle { cursor:pointer; font-size:15px; font-weight:700; margin:16px 0 10px; color: var(--ink); }
+  .notice { background:rgba(227,192,125,.08); border:1px solid rgba(227,192,125,.35); border-radius:12px; padding:10px 14px; font-size:13px; margin-bottom:16px; color: var(--ink); }
   .tab-buttons { display:flex; gap:6px; overflow-x:auto; margin-bottom:16px; padding-bottom:4px; }
-  .tab-btn { flex-shrink:0; padding:8px 14px; border-radius:6px; border:1px solid rgba(11,11,11,.1); background:transparent; cursor:pointer; font-size:13px; font-family:inherit; }
-  .tab-btn.active { background:#fcfcfb; border-color:#52514e; font-weight:600; }
+  .tab-btn { flex-shrink:0; padding:7px 14px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--muted); cursor:pointer; font-size:13px; font-family:inherit; }
+  .tab-btn.active { background:var(--gold); border-color:var(--gold); color:#1a1506; font-weight:700; }
   .controls { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; align-items:center; }
-  input[type=search] { padding:6px 10px; border:1px solid rgba(11,11,11,.1); border-radius:6px; font-size:13px; min-width:220px; font-family:inherit; }
-  .badge { display:inline-flex; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:600; border:1px solid currentColor; color:#898781; }
-  .empty { color: #898781; }
-  .entry { background:#fcfcfb; border:1px solid rgba(11,11,11,.1); border-radius:10px; padding:10px 14px; margin-bottom:8px; }
-  .entry summary { cursor:pointer; font-size:14px; }
-  .entry-stats { font-size:13px; color:#52514e; margin-top:8px; line-height:1.7; }
+  input[type=search] { padding:7px 12px; border:1px solid var(--line); border-radius:10px; font-size:13px; min-width:220px; font-family:inherit; background:var(--surface); color:var(--ink); }
+  input[type=search]::placeholder { color: var(--muted); }
+  input[type=search]:focus { outline:none; border-color:var(--gold); }
+  .badge { display:inline-flex; padding:2px 9px; border-radius:999px; font-size:11px; font-weight:600; border:1px solid var(--gold); color:var(--gold-lt); }
+  .empty { color: var(--muted); }
+  .entry { background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:10px 14px; margin-bottom:8px; }
+  .entry summary { cursor:pointer; font-size:14px; color:var(--ink); }
+  .entry-stats { font-size:13px; color:var(--muted); margin-top:8px; line-height:1.7; }
   .boss-rotation { font-size:13px; margin:6px 0 0; padding-left:20px; }
   .boss-rotation li { margin-bottom:2px; }
   .guide-section { margin-bottom:18px; }
-  .guide-section h2 { font-size:15px; margin:0 0 8px; }
-  .guide-section h3 { font-size:13px; color:#52514e; margin:12px 0 6px; }
-
+  .guide-section h2 { font-size:15px; margin:0 0 8px; color:var(--ink); }
+  .guide-section h3 { font-size:13px; color:var(--muted); margin:12px 0 6px; }
   .table-wrap { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #e1e0d9; white-space: nowrap; }
-  th { color: #898781; font-weight: 500; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 500; }
+
+  td { white-space: nowrap; }
 </style>
 </head>
 <body>
   <h1>釣り交換所(全106件)</h1>
   <p class="updated" id="updated"></p>
-  <p class="links"><a href="index.html">← 配合表トップへ</a> ・ <a href="monsters.html">モンスター図鑑</a> ・ <a href="bosses.html">ボス攻略</a> ・ <a href="guide.html">冒険ガイド</a> ・ <a href="jobs.html">職業スキル</a> ・ <a href="structures.html">建築物カタログ</a> ・ <a href="fishing.html">釣り交換所</a> ・ <a href="gambits.html">ガンビット解説</a> ・ <a href="smithing.html">鍛冶レシピ</a></p>
+  <p class="links"><a href="index.html">配合表トップ</a> ＞ <a href="wiki.html">攻略Wiki</a> ＞ 釣り交換所</p>
   <div class="controls">
     <input type="search" id="searchInput" placeholder="名前・分類で絞り込み">
   </div>
   <div class="table-wrap" id="content"></div>
 
-  <script id="page-data" type="application/json">{"fishItems":[{"points":100,"name":"上やくそう","category":"回復系","kind":"item"},{"points":200,"name":"万能薬","category":"回復系","kind":"item"},{"points":200,"name":"せかいじゅの葉","category":"回復系","kind":"item"},{"points":300,"name":"特やくそう","category":"回復系","kind":"item"},{"points":300,"name":"あやしい小ビン","category":"回復系","kind":"item"},{"points":500,"name":"にじいろの布きれ","category":"貴重素材","kind":"item"},{"points":500,"name":"はがねの尾羽","category":"貴重素材","kind":"item"},{"points":500,"name":"氷鳥のはね","category":"貴重素材","kind":"item"},{"points":500,"name":"メイジキメラのはね","category":"貴重素材","kind":"item"},{"points":500,"name":"武闘エキス","category":"貴重素材","kind":"item"},{"points":500,"name":"竜の火酒","category":"貴重素材","kind":"item"},{"points":500,"name":"闘魂エキス","category":"貴重素材","kind":"item"},{"points":500,"name":"さえずりのみつ","category":"貴重素材","kind":"item"},{"points":500,"name":"月のめぐみ","category":"貴重素材","kind":"item"},{"points":500,"name":"うらみのほうじゅ","category":"貴重素材","kind":"item"},{"points":500,"name":"スライムの冠","category":"貴重素材","kind":"item"},{"points":500,"name":"あまつゆの糸","category":"貴重素材","kind":"item"},{"points":500,"name":"せいなるしずく","category":"貴重素材","kind":"item"},{"points":5000,"name":"メタルオーブ","category":"貴重品","kind":"item"},{"points":5000,"name":"レッドオーブ","category":"貴重品","kind":"item"},{"points":5000,"name":"グリーンオーブ","category":"貴重品","kind":"item"},{"points":5000,"name":"ブルーオーブ","category":"貴重品","kind":"item"},{"points":5000,"name":"イエローオーブ","category":"貴重品","kind":"item"},{"points":5000,"name":"パープルオーブ","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(メタル、氷)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(防具)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(破壊)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(魔法)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(天空)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(剣、短剣)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(魔、呪)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(斧、槌、棍)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(槍、鞭、爪)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(弓、ブーメラン)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(伝説)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(竜、炎)","category":"貴重品","kind":"item"},{"points":100,"name":"べっこう","category":"鉱石系","kind":"item"},{"points":100,"name":"鉄鉱石","category":"鉱石系","kind":"item"},{"points":100,"name":"爆弾石","category":"鉱石系","kind":"item"},{"points":100,"name":"磨き砂","category":"鉱石系","kind":"item"},{"points":100,"name":"こおりの結晶","category":"鉱石系","kind":"item"},{"points":100,"name":"ほしのカケラ","category":"鉱石系","kind":"item"},{"points":100,"name":"溶岩石のかけら","category":"鉱石系","kind":"item"},{"points":200,"name":"時の水晶","category":"鉱石系","kind":"item"},{"points":200,"name":"かがみの石","category":"鉱石系","kind":"item"},{"points":200,"name":"たいようの石","category":"鉱石系","kind":"item"},{"points":200,"name":"ドラゴンのなみだ","category":"鉱石系","kind":"item"},{"points":200,"name":"いのちの石","category":"鉱石系","kind":"item"},{"points":300,"name":"いかずちの玉","category":"鉱石系","kind":"item"},{"points":300,"name":"ミスリル","category":"鉱石系","kind":"item"},{"points":300,"name":"ルビー","category":"鉱石系","kind":"item"},{"points":300,"name":"精霊石","category":"鉱石系","kind":"item"},{"points":500,"name":"金塊","category":"鉱石系","kind":"item"},{"points":500,"name":"キングダイヤ","category":"鉱石系","kind":"item"},{"points":500,"name":"竜のなみだ","category":"鉱石系","kind":"item"},{"points":500,"name":"月のダイヤ","category":"鉱石系","kind":"item"},{"points":500,"name":"プラチナ","category":"鉱石系","kind":"item"},{"points":750,"name":"幻魔石","category":"鉱石系","kind":"item"},{"points":750,"name":"ヘビーメタル","category":"鉱石系","kind":"item"},{"points":750,"name":"光の石","category":"鉱石系","kind":"item"},{"points":750,"name":"オリハルコン","category":"鉱石系","kind":"item"},{"points":1000,"name":"プラチナ合金","category":"鉱石系","kind":"item"},{"points":1000,"name":"太陽石合金","category":"鉱石系","kind":"item"},{"points":1000,"name":"ミスリル合金","category":"鉱石系","kind":"item"},{"points":1500,"name":"オリハルコン合金","category":"鉱石系","kind":"item"},{"points":5000,"name":"青幻魔石","category":"鉱石系","kind":"item"},{"points":5000,"name":"緑幻魔石","category":"鉱石系","kind":"item"},{"points":50,"name":"あやかし草","category":"素材","kind":"item"},{"points":50,"name":"どくどくヘドロ","category":"素材","kind":"item"},{"points":50,"name":"どくがの粉","category":"素材","kind":"item"},{"points":50,"name":"こうもりの羽根","category":"素材","kind":"item"},{"points":50,"name":"まりょくの土","category":"素材","kind":"item"},{"points":50,"name":"うるわしキノコ","category":"素材","kind":"item"},{"points":50,"name":"うさぎのしっぽ","category":"素材","kind":"item"},{"points":50,"name":"赤いサンゴ","category":"素材","kind":"item"},{"points":50,"name":"スライムおしゃれ花","category":"素材","kind":"item"},{"points":50,"name":"れんごくの羽根","category":"素材","kind":"item"},{"points":50,"name":"ガマのあぶら","category":"素材","kind":"item"},{"points":50,"name":"花のみつ","category":"素材","kind":"item"},{"points":50,"name":"まだらクモ糸","category":"素材","kind":"item"},{"points":50,"name":"ネコ砂","category":"素材","kind":"item"},{"points":50,"name":"うまのふん","category":"素材","kind":"item"},{"points":50,"name":"うしのふん","category":"素材","kind":"item"},{"points":50,"name":"まじゅうの皮","category":"素材","kind":"item"},{"points":50,"name":"みどりコケ","category":"素材","kind":"item"},{"points":50,"name":"スライムゼリー","category":"素材","kind":"item"},{"points":50,"name":"ねばねばゼリー","category":"素材","kind":"item"},{"points":50,"name":"風切りの羽根","category":"素材","kind":"item"},{"points":50,"name":"ちょうの羽","category":"素材","kind":"item"},{"points":50,"name":"ホネホネ","category":"素材","kind":"item"},{"points":50,"name":"白いかいがら","category":"素材","kind":"item"},{"points":50,"name":"トゲトゲの牙","category":"素材","kind":"item"},{"points":50,"name":"やわらかウール","category":"素材","kind":"item"},{"points":50,"name":"よごれた包帯","category":"素材","kind":"item"},{"points":50,"name":"つけもの石","category":"素材","kind":"item"},{"points":50,"name":"リサイクルストーン","category":"素材","kind":"item"},{"points":250,"name":"ヘビのぬけがら","category":"中素材","kind":"item"},{"points":250,"name":"呪力のモト","category":"中素材","kind":"item"},{"points":250,"name":"まじゅうの角","category":"中素材","kind":"item"},{"points":250,"name":"聖者の灰","category":"中素材","kind":"item"},{"points":250,"name":"巨大ヒゲトカゲ","category":"中素材","kind":"item"},{"points":250,"name":"よるのとばり","category":"中素材","kind":"item"},{"points":250,"name":"巨大な牙","category":"中素材","kind":"item"},{"points":250,"name":"てんしのはね","category":"中素材","kind":"item"},{"points":250,"name":"てつのクギ","category":"中素材","kind":"item"},{"points":250,"name":"きよめの水","category":"中素材","kind":"item"}],"generatedAt":"2026/08/29 13:39:00"}</script>
+  <script id="page-data" type="application/json">{"fishItems":[{"points":100,"name":"上やくそう","category":"回復系","kind":"item"},{"points":200,"name":"万能薬","category":"回復系","kind":"item"},{"points":200,"name":"せかいじゅの葉","category":"回復系","kind":"item"},{"points":300,"name":"特やくそう","category":"回復系","kind":"item"},{"points":300,"name":"あやしい小ビン","category":"回復系","kind":"item"},{"points":500,"name":"にじいろの布きれ","category":"貴重素材","kind":"item"},{"points":500,"name":"はがねの尾羽","category":"貴重素材","kind":"item"},{"points":500,"name":"氷鳥のはね","category":"貴重素材","kind":"item"},{"points":500,"name":"メイジキメラのはね","category":"貴重素材","kind":"item"},{"points":500,"name":"武闘エキス","category":"貴重素材","kind":"item"},{"points":500,"name":"竜の火酒","category":"貴重素材","kind":"item"},{"points":500,"name":"闘魂エキス","category":"貴重素材","kind":"item"},{"points":500,"name":"さえずりのみつ","category":"貴重素材","kind":"item"},{"points":500,"name":"月のめぐみ","category":"貴重素材","kind":"item"},{"points":500,"name":"うらみのほうじゅ","category":"貴重素材","kind":"item"},{"points":500,"name":"スライムの冠","category":"貴重素材","kind":"item"},{"points":500,"name":"あまつゆの糸","category":"貴重素材","kind":"item"},{"points":500,"name":"せいなるしずく","category":"貴重素材","kind":"item"},{"points":5000,"name":"メタルオーブ","category":"貴重品","kind":"item"},{"points":5000,"name":"レッドオーブ","category":"貴重品","kind":"item"},{"points":5000,"name":"グリーンオーブ","category":"貴重品","kind":"item"},{"points":5000,"name":"ブルーオーブ","category":"貴重品","kind":"item"},{"points":5000,"name":"イエローオーブ","category":"貴重品","kind":"item"},{"points":5000,"name":"パープルオーブ","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(メタル、氷)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(防具)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(破壊)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(魔法)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(天空)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(剣、短剣)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(魔、呪)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(斧、槌、棍)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(槍、鞭、爪)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(弓、ブーメラン)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(伝説)","category":"貴重品","kind":"item"},{"points":30000,"name":"貴重なレシピ(竜、炎)","category":"貴重品","kind":"item"},{"points":100,"name":"べっこう","category":"鉱石系","kind":"item"},{"points":100,"name":"鉄鉱石","category":"鉱石系","kind":"item"},{"points":100,"name":"爆弾石","category":"鉱石系","kind":"item"},{"points":100,"name":"磨き砂","category":"鉱石系","kind":"item"},{"points":100,"name":"こおりの結晶","category":"鉱石系","kind":"item"},{"points":100,"name":"ほしのカケラ","category":"鉱石系","kind":"item"},{"points":100,"name":"溶岩石のかけら","category":"鉱石系","kind":"item"},{"points":200,"name":"時の水晶","category":"鉱石系","kind":"item"},{"points":200,"name":"かがみの石","category":"鉱石系","kind":"item"},{"points":200,"name":"たいようの石","category":"鉱石系","kind":"item"},{"points":200,"name":"ドラゴンのなみだ","category":"鉱石系","kind":"item"},{"points":200,"name":"いのちの石","category":"鉱石系","kind":"item"},{"points":300,"name":"いかずちの玉","category":"鉱石系","kind":"item"},{"points":300,"name":"ミスリル","category":"鉱石系","kind":"item"},{"points":300,"name":"ルビー","category":"鉱石系","kind":"item"},{"points":300,"name":"精霊石","category":"鉱石系","kind":"item"},{"points":500,"name":"金塊","category":"鉱石系","kind":"item"},{"points":500,"name":"キングダイヤ","category":"鉱石系","kind":"item"},{"points":500,"name":"竜のなみだ","category":"鉱石系","kind":"item"},{"points":500,"name":"月のダイヤ","category":"鉱石系","kind":"item"},{"points":500,"name":"プラチナ","category":"鉱石系","kind":"item"},{"points":750,"name":"幻魔石","category":"鉱石系","kind":"item"},{"points":750,"name":"ヘビーメタル","category":"鉱石系","kind":"item"},{"points":750,"name":"光の石","category":"鉱石系","kind":"item"},{"points":750,"name":"オリハルコン","category":"鉱石系","kind":"item"},{"points":1000,"name":"プラチナ合金","category":"鉱石系","kind":"item"},{"points":1000,"name":"太陽石合金","category":"鉱石系","kind":"item"},{"points":1000,"name":"ミスリル合金","category":"鉱石系","kind":"item"},{"points":1500,"name":"オリハルコン合金","category":"鉱石系","kind":"item"},{"points":5000,"name":"青幻魔石","category":"鉱石系","kind":"item"},{"points":5000,"name":"緑幻魔石","category":"鉱石系","kind":"item"},{"points":50,"name":"あやかし草","category":"素材","kind":"item"},{"points":50,"name":"どくどくヘドロ","category":"素材","kind":"item"},{"points":50,"name":"どくがの粉","category":"素材","kind":"item"},{"points":50,"name":"こうもりの羽根","category":"素材","kind":"item"},{"points":50,"name":"まりょくの土","category":"素材","kind":"item"},{"points":50,"name":"うるわしキノコ","category":"素材","kind":"item"},{"points":50,"name":"うさぎのしっぽ","category":"素材","kind":"item"},{"points":50,"name":"赤いサンゴ","category":"素材","kind":"item"},{"points":50,"name":"スライムおしゃれ花","category":"素材","kind":"item"},{"points":50,"name":"れんごくの羽根","category":"素材","kind":"item"},{"points":50,"name":"ガマのあぶら","category":"素材","kind":"item"},{"points":50,"name":"花のみつ","category":"素材","kind":"item"},{"points":50,"name":"まだらクモ糸","category":"素材","kind":"item"},{"points":50,"name":"ネコ砂","category":"素材","kind":"item"},{"points":50,"name":"うまのふん","category":"素材","kind":"item"},{"points":50,"name":"うしのふん","category":"素材","kind":"item"},{"points":50,"name":"まじゅうの皮","category":"素材","kind":"item"},{"points":50,"name":"みどりコケ","category":"素材","kind":"item"},{"points":50,"name":"スライムゼリー","category":"素材","kind":"item"},{"points":50,"name":"ねばねばゼリー","category":"素材","kind":"item"},{"points":50,"name":"風切りの羽根","category":"素材","kind":"item"},{"points":50,"name":"ちょうの羽","category":"素材","kind":"item"},{"points":50,"name":"ホネホネ","category":"素材","kind":"item"},{"points":50,"name":"白いかいがら","category":"素材","kind":"item"},{"points":50,"name":"トゲトゲの牙","category":"素材","kind":"item"},{"points":50,"name":"やわらかウール","category":"素材","kind":"item"},{"points":50,"name":"よごれた包帯","category":"素材","kind":"item"},{"points":50,"name":"つけもの石","category":"素材","kind":"item"},{"points":50,"name":"リサイクルストーン","category":"素材","kind":"item"},{"points":250,"name":"ヘビのぬけがら","category":"中素材","kind":"item"},{"points":250,"name":"呪力のモト","category":"中素材","kind":"item"},{"points":250,"name":"まじゅうの角","category":"中素材","kind":"item"},{"points":250,"name":"聖者の灰","category":"中素材","kind":"item"},{"points":250,"name":"巨大ヒゲトカゲ","category":"中素材","kind":"item"},{"points":250,"name":"よるのとばり","category":"中素材","kind":"item"},{"points":250,"name":"巨大な牙","category":"中素材","kind":"item"},{"points":250,"name":"てんしのはね","category":"中素材","kind":"item"},{"points":250,"name":"てつのクギ","category":"中素材","kind":"item"},{"points":250,"name":"きよめの水","category":"中素材","kind":"item"}],"generatedAt":"2026/08/29 13:39:30"}</script>
   <script>
   (function () {
     var data = JSON.parse(document.getElementById('page-data').textContent);
     var fishItems = data.fishItems;
     document.getElementById('updated').textContent = '最終更新: ' + data.generatedAt;
-
+    
     function escapeHtml(s) {
       return String(s).replace(/[&<>"']/g, function (c) {
         return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
       });
     }
+    function expandHashDetails() {
+      if (!location.hash) return;
+      var target = document.querySelector(location.hash);
+      if (target && target.tagName === 'DETAILS') {
+        target.open = true;
+        target.scrollIntoView();
+      }
+    }
+
 
     function render() {
       var query = document.getElementById('searchInput').value.trim().toLowerCase();
