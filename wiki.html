@@ -68,7 +68,7 @@
   </div>
   <div class="wiki-grid" id="wikiGrid"></div>
 
-  <script id="page-data" type="application/json">{"counts":{"monsters":577,"bosses":17,"guide":430,"jobs":18,"structures":144,"fishing":106,"gambitPresets":7,"smithing":1122},"generatedAt":"2026/08/29 14:05:58"}</script>
+  <script id="page-data" type="application/json">{"counts":{"monsters":577,"bosses":17,"guide":430,"jobs":18,"structures":144,"fishing":106,"gambitPresets":7,"smithing":1122,"items":1159},"generatedAt":"2026/08/29 14:06:55"}</script>
   <script>
   (function () {
     var data = JSON.parse(document.getElementById('page-data').textContent);
@@ -98,6 +98,7 @@
       { href: 'fishing.html', icon: '🎣', title: '釣り交換所', desc: '釣った魚と交換できるアイテム一覧', count: data.counts.fishing, unit: '件' },
       { href: 'gambits.html', icon: '⚙️', title: 'ガンビット解説', desc: 'ペットの行動自動化ルールとプリセット', count: data.counts.gambitPresets, unit: 'プリセット' },
       { href: 'smithing.html', icon: '🔨', title: '鍛冶レシピ', desc: '装備・アイテムの鍛冶レシピ全一覧', count: data.counts.smithing, unit: '件' },
+      { href: 'items.html', icon: '🔍', title: 'アイテム検索', desc: 'ほしいアイテムがどこで手に入るか調べる', count: data.counts.items, unit: '件' },
     ];
 
     function render() {
