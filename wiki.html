@@ -68,7 +68,7 @@
   </div>
   <div class="wiki-grid" id="wikiGrid"></div>
 
-  <script id="page-data" type="application/json">{"counts":{"monsters":595,"bosses":17,"guide":430,"jobs":18,"structures":144,"fishing":106,"gambitPresets":7,"smithing":1125,"items":1138},"generatedAt":"2026/09/01 10:35:25"}</script>
+  <script id="page-data" type="application/json">{"counts":{"monsters":595,"bosses":17,"guide":430,"jobs":18,"structures":144,"fishing":106,"gambitPresets":7,"smithing":1125,"items":1138,"statCalculator":596},"generatedAt":"2026/09/01 10:35:43"}</script>
   <script>
   (function () {
     var data = JSON.parse(document.getElementById('page-data').textContent);
@@ -99,6 +99,7 @@
       { href: 'gambits.html', icon: '⚙️', title: 'ガンビット解説', desc: 'ペットの行動自動化ルールとプリセット', count: data.counts.gambitPresets, unit: 'プリセット' },
       { href: 'smithing.html', icon: '🔨', title: '鍛冶レシピ', desc: '装備・アイテムの鍛冶レシピ全一覧', count: data.counts.smithing, unit: '件' },
       { href: 'items.html', icon: '🔍', title: 'アイテム検索', desc: 'ほしいアイテムがどこで手に入るか調べる', count: data.counts.items, unit: '件' },
+      { href: 'stat-calculator.html', icon: '🧮', title: 'ステータス計算機', desc: '配合結果・レベルアップ後のステータスを計算', count: data.counts.statCalculator, unit: '体対応' },
     ];
 
     function render() {
