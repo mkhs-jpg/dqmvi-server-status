@@ -68,7 +68,7 @@
   </div>
   <div class="wiki-grid" id="wikiGrid"></div>
 
-  <script id="page-data" type="application/json">{"counts":{"monsters":645,"bosses":18,"guide":539,"jobs":26,"structures":142,"fishing":106,"gambitPresets":7,"smithing":1228,"items":1269,"spells":96,"statCalculator":646},"generatedAt":"2026/09/08 00:00:36"}</script>
+  <script id="page-data" type="application/json">{"counts":{"monsters":645,"bosses":18,"guide":539,"jobs":26,"structures":142,"biomes":16,"fishing":106,"gambitPresets":7,"smithing":1228,"items":1269,"spells":96,"statCalculator":646},"generatedAt":"2026/09/08 00:01:11"}</script>
   <script>
   (function () {
     var data = JSON.parse(document.getElementById('page-data').textContent);
@@ -95,6 +95,7 @@
       { href: 'guide.html', icon: '🧭', title: '冒険ガイド', desc: 'ゲーム内チュートリアルの全項目', count: data.counts.guide, unit: '項目' },
       { href: 'jobs.html', icon: '🎓', title: '職業スキル', desc: '職業ごとのスキル・武器/ステータスランク', count: data.counts.jobs, unit: '職業' },
       { href: 'structures.html', icon: '🏛️', title: '建築物カタログ', desc: '施設・ダンジョンのサイズとNPC数', count: data.counts.structures, unit: '件' },
+      { href: 'biomes.html', icon: '🗺️', title: 'バイオーム図鑑', desc: 'バイオームの種類と、探索が進むほど上がるバイオームランク', count: data.counts.biomes, unit: '種' },
       { href: 'fishing.html', icon: '🎣', title: '釣り交換所', desc: '釣った魚と交換できるアイテム一覧', count: data.counts.fishing, unit: '件' },
       { href: 'gambits.html', icon: '⚙️', title: 'ガンビット解説', desc: 'ペットの行動自動化ルールとプリセット', count: data.counts.gambitPresets, unit: 'プリセット' },
       { href: 'smithing.html', icon: '🔨', title: '鍛冶レシピ', desc: '装備・アイテムの鍛冶レシピ全一覧', count: data.counts.smithing, unit: '件' },
